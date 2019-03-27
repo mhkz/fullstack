@@ -1,18 +1,21 @@
+const { getList, getDetail } = require('../controller/blog.js')
+const {ErrorModel, SuccessModel} = require('../model/resModel')
+
 const serverHandlerRouter = (req, res) => {
     const method = req.method; // GET POST
    
-    // const query = url.split("?")[1];
 
     if(method === 'GET' && req.path === '/api/blog/list') {
-       return {
-           msg: '返回文章列表'
-       }
+        const author = req.query.author || ''
+        const keyword = req.query.keyword || ''
+        const listData = getList(author, keyword)
+        return new SuccessModel(listData)
     }
 
     if(method === 'GET' && req.path === '/api/blog/detail') {
-        return {
-            msg: '获取博客详情接口'
-        }
+        let id = req.query.id
+        const detailData = getDetail(id)
+        return new SuccessModel(detailData)
      }
 
 
