@@ -1,3 +1,4 @@
+const {exec} = require('../db/mysql')
 const getList = (auth, keyword) => {
     // 返回数据格式
     return [
