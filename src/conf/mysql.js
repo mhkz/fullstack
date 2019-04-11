@@ -6,8 +6,8 @@ if (env == 'dev') {
     MYSQL_CONF = {
         host:'localhost',
         user:'root',
-        password:'guofeng2019',
-        database:'myblog'
+        password:'123456',
+        database:'blog'
     }
 }
 
@@ -15,8 +15,8 @@ if(env == 'pro') {
     MYSQL_CONF = {
         host:'localhost',
         user:'root',
-        password:'guofeng2019',
-        database:'myblog'
+        password:'123456',
+        database:'blog'
     }
 }
 

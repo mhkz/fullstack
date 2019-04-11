@@ -1,22 +1,15 @@
 const {exec} = require('../db/mysql')
-const getList = (auth, keyword) => {
-    // 返回数据格式
-    return [
-        {
-            id: 1,
-            name: 'xxx',
-            content: 'xxx',
-            createTime: '',
-            auth: 'zhang san',
-        },
-        {
-            id: 2,
-            name: 'xxx',
-            content: 'xxx',
-            createTime: '',
-            auth: 'li si',
-        }
-    ]
+const getList = (author, keyword) => {
+    let sql = `select * from blogs where 1=1 `
+    if (author) {
+        sql += `and author=${author}`
+    }
+    if(keyword) {
+        sql += `and title like '%${keyword}'`
+    }
+    sql +=`order by createtime desc`
+
+    return exec(sql)
 }
 
 const getDetail = id => {

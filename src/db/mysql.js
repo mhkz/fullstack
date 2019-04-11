@@ -14,9 +14,9 @@ const exec = (sql) => {
                 return
             }
             resolve(result)
-            return
         })
     })
+    return promise
 }
 
 module.exports = {
