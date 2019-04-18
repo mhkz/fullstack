@@ -12,39 +12,47 @@ const serverHandlerRouter = (req, res) => {
 
         const result = getList(author, keyword)
         return result.then(listData => {
-            console.log("=====listData====", listData)
             return new SuccessModel(listData)
         })
     }
 
     if (method === 'GET' && req.path === '/api/blog/detail') {
-        const detailData = getDetail(id)
-        return new SuccessModel(detailData)
+        const result = getDetail(id)
+        return result.then(data => new SuccessModel(data))
+
     }
 
 
     if (method === 'POST' && req.path === '/api/blog/new') {
-        const data = newBlog(req.body)
-        return new SuccessModel(data)
+        req.body.author = 'zhangsan'
+        const result = newBlog(req.body)
+        return result.then(data => new SuccessModel(data))
     }
 
     // 更新博客
     if (method === 'POST' && req.path === '/api/blog/update') {
-        const data = updateBlog(id, req.body)
-        if (data) {
-            return new SuccessModel(data)
-        } else {
-            return new ErrorModel('博客更新失败')
-        }
+        const result = updateBlog(id, req.body)
+        return result.then(val => {
+            if (val) {
+                return new SuccessModel(val)
+            } else {
+                return new ErrorModel('博客更新失败')
+            }
+        })
+
     }
 
     if (method === 'POST' && req.path === '/api/blog/delete') {
-        const data = delBlog(id)
-        if (data) {
-            return new SuccessModel(data)
-        } else {
-            return new ErrorModel('博客更新失败')
-        }
+
+        const author = "zhangsan"
+        const result = delBlog(id, author)
+        return result.then(resultData => {
+            if (resultData) {
+                return new SuccessModel(resultData)
+            } else {
+                return new ErrorModel('博客更新失败')
+            }
+        })
     }
 }
 
